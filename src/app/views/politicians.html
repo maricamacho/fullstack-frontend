@@ -1,0 +1,55 @@
+<!-- Vista para listar todos los registros políticos de la base de datos -->
+<div class="col-md-12 list-politicians">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="heading">
+            <h4>{{title}}</h4>
+        </div>
+        <!-- Añadimos módulo de paginación -->
+        <ul class="pagination" *ngIf="politicians && politicians.length >= 1">
+            <li>
+                <a [routerLink]="['/index/', pagePrev]" arial-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li>
+                <span aria-hidden="true">{{pageNow}}</span>
+            </li>
+            <li>
+                <a [routerLink]="['/index/', pageNext]" arial-label="Siguiente">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        </ul>
+        <!-- Efecto cargando -->
+        <div class="loader" *ngIf="loading=='show'">
+            <img src="/assets/img/loader.gif"/>
+        </div>
+        <!-- Tabla con los datos devueltos -->
+        <table class="table table-hover table-stripped" id="politicians-list" *ngIf="politicians && politicians.length >= 1">
+            <tr *ngFor="let politician of politicians" class="politician-item">
+                <!-- Botón para acceder a los datos completos del político -->
+                <td><a [routerLink]="['/politician', politician.id]">{{politician.tITULAR}}</a></td>
+                <!-- Datos de resumen -->
+                <td>{{politician.cARGO}} ({{politician.iNSTITUCION}}) - {{politician.cCAA}}</td>
+                <!-- Botón para acceder y modificar a los datos completos del político -->
+                <td><a [routerLink]="['/update', politician.id]"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+            </tr> 
+        </table>
+        <!-- Añadimos módulo de paginación -->
+        <ul class="pagination" *ngIf="politicians && politicians.length >= 1">
+            <li>
+                <a [routerLink]="['/index/', pagePrev]" arial-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li>
+                <span aria-hidden="true">{{pageNow}}</span>
+            </li>
+            <li>
+                <a [routerLink]="['/index/', pageNext]" arial-label="Siguiente">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

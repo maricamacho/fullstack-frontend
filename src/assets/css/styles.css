@@ -1,0 +1,208 @@
+
+/*Estilos propios*/
+
+html, body {
+    color: #212529;
+    background-color: #fff;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.btn-success {
+    background-color: #2F5f79;
+    border-color: #2F5f79;
+}
+.btn-success:hover {
+    background-color: #1AE0AC;
+    border-color: #1AE0AC;
+}
+
+.list-politicians,
+.new-politician,
+.detail-politician{
+    margin: 40px auto;
+}
+
+.glyphicon {
+    cursor: pointer;
+}
+
+/*NavBar*/
+.navbar {
+    background-color: #fff;
+    z-index: 9999;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #111111;
+}
+
+.navbar-default .navbar-toggle {
+    border: 0;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #1AE0AC;
+}
+
+
+.navbar-brand {
+    color: #2F5f79;
+}
+
+
+.navbar-brand span{
+    color: #2F5f79;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.navbar-brand em{
+    color: #1AE0AC;
+    font-size: 15px;
+}
+
+.navbar-default .navbar-nav>li>a  {
+    color: #1AE0AC;
+    width: 250px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+    background: #1AE0AC;
+    width: 250px;
+    text-align: center;
+}
+
+.navbar-default .navbar-nav>li>a:active {
+    color: white;
+    background: #1AE0AC;
+    width: 250px;
+    text-align: center;
+}
+
+.heading {
+    margin: 30px auto;
+    font-family: "Roboto Slab",serif;
+    color: #575756;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 28px;
+}
+
+/*Loading*/
+
+.loader {
+	display: block;
+	margin: 0px;
+	text-align: center;
+	margin-bottom: 15px;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        z-index: 999;
+}
+
+/*Lista políticos*/
+
+.list-politicians #politicians-list td{
+    border-color: #1AE0AC;
+    font-family: "Roboto",sans-serif;
+    
+}
+
+.list-politicians #politicians-list .politician-item .politic_number{
+    text-align: right;
+}
+
+/*Nuevo-Editar político*/
+.politician-form label {
+    font-family: "Roboto",sans-serif;
+    color: #2F5f79;
+    font-weight: normal;
+}
+
+/*Nuevo-Editar político*/
+
+.form-control {
+    border: 0.5px solid #eeeeee;
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+
+
+
+.politician-form .msg-req {
+    font-family: "Roboto Slab",serif;
+    color: #1AE0AC;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.politician-form #msg-req-info {
+    font-weight: normal;
+    margin: 20px 0;
+    color: #2F5f79;
+    font-size: 14px;
+}
+
+/*Detalle político*/
+
+.detail-politician .container{
+    width: 100%;
+}
+
+.detail-politician #name{
+    color: #1AE0AC;
+}
+
+.detail-politician #name #edit-button{
+    margin-left: 10px;
+    font-size: 18px;
+    vertical-align: top;
+}
+
+.detail-politician ul li::before {
+  content: "\2022";
+  color: #1AE0AC;
+  font-weight: bold;
+  display: inline-block; 
+  width: 1em;
+  margin-left: -1em;
+}
+
+.detail-politician #info-heading {
+    margin-top: 45px;
+    font-family: "Roboto Slab",serif;
+    text-transform: uppercase;
+}
+    
+.detail-politician .panel-body {
+    background-color: #f4f4f4;
+}
+
+.detail-politician #salary {
+    background-color: #d9d9d9;
+    padding: 15px;
+    margin: 20px auto;
+}
+
+.detail-politician #salary-text{
+    margin-top:15px;
+    color: #2F5f79;
+}
+
+.detail-politician #salary-info {
+    margin-bottom:15px;
+}
+
+    
+
+
+

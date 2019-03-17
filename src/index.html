@@ -2,13 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Angular</title>
+  <title>BBDDPolíticos</title>
   <base href="/">
-
+  
+  <!-- Cargar librerias -->
+  <!--<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+  <script type="text/javascript" src="node_modules/bootstrap/dist/bootstrap.min.js"></script>-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css"  href="assets/css/styles.css"/>
+  <!-- Favinco -->
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <!-- Responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root></app-root>
+    <app-root> 
+        <!-- Efecto cargando -->
+        <div class="loader col-md-6 col-md-offset-3" *ngIf="loading=='show'">
+            <img src="/assets/img/loader.gif"/>
+        </div>
+     </app-root>
 </body>
 </html>

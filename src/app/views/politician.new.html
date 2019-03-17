@@ -1,0 +1,224 @@
+
+<!-- Vista para crear o modificar un registro político de la base de datos -->
+<div class="col-md-12 new-politician">
+    <div class="col-md-6 col-md-offset-3">
+            <div class="heading">
+                <h4>{{title}}</h4>
+            </div>
+            <!-- Efecto cargando -->
+            <div class="loader" *ngIf="loading=='show'">
+                <img src="/assets/img/loader.gif"/>
+            </div>
+            <!-- Mensajes de éxito o error según el mensaje devuelto -->
+            <div class="alert alert-success" *ngIf="status=='sucess'">
+                    Registro creado/modificado correctamente
+            </div>
+            <div class="alert alert-danger" *ngIf="status=='error'">
+                    Opps! ha ocurrido un error, no se ha creado/modificado el registro: {{msg_error}}
+            </div>
+            <!-- Formulario PoliticianNewForm lincado con el modelo politician -->
+            <form #PoliticianNewForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-12 politician-form">
+                <!--- Campo texto Titular -->
+                <p>
+                    <label>
+                        Titular* 
+                        <!-- Validación del campo -->
+                        <span class="msg-req" *ngIf="!titular.valid && (titular.dirty || titular.touched)">
+                            Campo requerido
+                        </span>
+                    </label>
+                    <input type="text" class="form-control" name="titular" #titular="ngModel" [(ngModel)]="politician.tITULAR" required>
+                </p>
+                <!-- Seleccionable campo Partido -->
+                <p>
+                    <label>
+                        Partido*
+                        <!-- Validación del campo -->
+                        <span class="msg-req" *ngIf="!partido_para_filtro.valid && (partido_para_filtro.dirty || partido_para_filtro.touched)">
+                            Campo requerido
+                        </span>
+                    </label>
+                    <select class="form-control" name="partido_para_filtro" #partido_para_filtro="ngModel" [(ngModel)]="politician.pARTIDO_PARA_FILTRO" required>
+                        <option value="">Seleccione</option>
+                        <option value="Bidu">Bidu</option>
+                        <option value="Ciudadanos">Ciudadanos</option>
+                        <option value="Coalición Canaria">Coalición Canaria</option>
+                        <option value="Compromís">Compromís</option>
+                        <option value="ERC">ERC</option>
+                        <option value="Otros partidos" (ngSelected)="partidoShow=true">Otros partidos</option>
+                        <option value="Partido Popular">Partido Popular</option>
+                        <option value="PdeCAT y otras listas derivadas de CDC">PdeCAT y otras listas derivadas de CDC</option> 
+                        <option value="PNV">PNV</option> 
+                        <option value="PSOE">PSOE</option> 
+                        <option value="Sin Partido">Sin Partido</option> 
+                        <option value="Unidos Podemos, confluendias y listas afines">Unidos Podemos, confluendias y listas afines</option> 
+                        <option value="Vox">Vox</option> 
+                    </select>
+                </p>
+                <!-- Campo texto Partido, en caso de especificar -->
+                <p>
+                    <label>Partido (en caso de especificar)</label>
+                    <input type="text" class="form-control" name="partido" #partido="ngModel" [(ngModel)]="politician.pARTIDO"/>
+                </p>
+                <!-- Seleccionable campo Género -->
+                <p>
+                    <label>
+                        Género*
+                        <!-- Validación del campo -->
+                        <span class="msg-req" *ngIf="!genero.valid && (genero.dirty || genero.touched)">
+                            Campo requerido
+                        </span>
+                    </label>
+                    <select class="form-control" name="genero" #genero="ngModel" [(ngModel)]="politician.gENERO" required>
+                        <option>Seleccione</option>
+                        <option value="Hombre">Hombre</option>
+                        <option value="Mujer">Mujer</option>
+                    </select>
+                </p>
+                <!-- Seleccionable campo Género -->
+                <p>
+                    <label>
+                        Cargo*
+                        <!-- Validación del campo -->
+                        <span class="msg-req" *ngIf="!cargo_para_filtro.valid && (cargo_para_filtro.dirty || cargo_para_filtro.touched)">
+                            Campo requerido
+                        </span>
+                    </label>
+                    <select class="form-control" name="cargo_para_filtro" #cargo_para_filtro="ngModel" [(ngModel)]="politician.cARGO_PARA_FILTRO" required>
+                        <option value="">Seleccione</option>
+                        <option value="Alcalde">Alcalde</option>
+                        <option value="Altos Cargos de la Ccaa">Altos Cargos de la Ccaa</option>
+                        <option value="Altos Cargos Locales">Altos Cargos Locales</option>
+                        <option value="Asesor">Asesor</option>
+                        <option value="Consejal">Consejal</option>
+                        <option value="Diputado Cca">Diputado Cca</option>
+                        <option value="Diputado Nacional">Diputado Nacional</option>
+                        <option value="Eurodiputado">Eurodiputado</option> 
+                        <option value="Ministro">Ministro</option> 
+                        <option value="Otros Altos Cargos De La Administración Central">Otros Altos Cargos De La Administración Central</option> 
+                        <option value="Presidente De Ccaa">Presidente De Ccaa</option> 
+                        <option value="Presidente De Diputación">Presidente De Diputación</option>
+                        <option value="Presidente Del Gobierno">Presidente Del Gobierno</option>  
+                        <option value="Secretario Del Estado">Secretario Del Estado</option> 
+                        <option value="Senador">Senador</option> 
+                        <option value="Subsecretarios">Subsecretarios</option> 
+                    </select>
+                </p>
+                <!-- Campo texto Cargo, en caso de especificar -->
+                <p>
+                    <label>Cargo (en caso de especificar)</label>
+                    <input type="text" class="form-control" name="cargp" #cargo="ngModel" [(ngModel)]="politician.cARGO"/>
+                </p>
+                <!-- Campo texto Institución -->
+                <p>
+                    <label>
+                        Institución*
+                        <!-- Validación del campo -->
+                        <span class="msg-req" *ngIf="!institucion.valid && (institucion.dirty || institucion.touched)">
+                            Campo requerido
+                        </span>
+                    </label>
+                    <input type="text"  class="form-control" name="institucion" #institucion="ngModel" [(ngModel)]="politician.iNSTITUCION" required>
+                    
+                </p>
+                <!-- Seleccionable campo CCAA -->
+                <p>
+                <label>
+                    Comunidad Autónoma*
+                    <!-- Validación del campo -->
+                    <span class="msg-req" *ngIf="!ccaa.valid && (ccaa.dirty || ccaa.touched)">
+                        Campo requerido
+                    </span>
+                </label>
+                    <select class="form-control" name="ccaa"  #ccaa="ngModel" [(ngModel)]="politician.cCAA" required>
+                        <option value="">Seleccione</option>
+                        <option value="Andalucía">Andalucía</option>
+                        <option value="Aragón">Aragón</option>
+                        <option value="Asturias">Asturias</option>
+                        <option value="Baleares">Baleares</option>
+                        <option value="Canarias">Canarias</option>
+                        <option value="Cantabria">Cantabria</option>
+                        <option value="Castilla La Mancha">Castilla La Mancha</option>
+                        <option value="Castilla y León">Castilla y León</option>
+                        <option value="Castilla-La Mancha">Castilla-La Mancha</option>
+                        <option value="Catalunya">Catalunya</option>
+                        <option value="Ceuta">Ceuta</option>
+                        <option value="Comunidad Valenciana">Comunidad Valenciana</option>
+                        <option value="Extremadura">Extremadura</option>
+                        <option value="Galicia">Galicia</option>
+                        <option value="La Rioja">La Rioja</option>
+                        <option value="Madrid">Madrid</option>
+                        <option value="Murcia">Murcia</option>
+                        <option value="Navarra">Navarra</option>
+                        <option value="País Vasco">País Vasco</option>
+                        <option value="Región de Murcia">Región de Murcia</option>
+                        <option value="Unión Europea">Unión Europea</option>
+                        <option value="Ámbito Nacional">Ámbito Nacional</option>
+                    </select>
+                </p>
+                <!-- Campo number Sueldo Base -->
+                <p>
+                    <label>
+                        Sueldo Base* 
+                        <!-- Validación del campo -->
+                        <span class="msg-req" *ngIf="!sueldobase_sueldo.valid && (sueldobase_sueldo.dirty || sueldobase_sueldo.touched)">
+                            Campo requerido. Formato número: xxxx.xx
+                        </span>
+                    </label>
+                    <input placeholder="Formato número: xxxx.xx" type="number" class="form-control" name="sueldobase_sueldo" #sueldobase_sueldo="ngModel" [(ngModel)]="politician.sUELDOBASE_SUELDO" required>
+                </p>
+                <!-- Campo texto Complementos Base -->
+                <p>
+                    <label>Complementos Sueldo</label>
+                    <input placeholder="Formato número: xxxx.xx" type="number" class="form-control" name="complementos_sueldo" #complementos_sueldo="ngModel" [(ngModel)]="politician.cOMPLEMENTOS_SUELDO">
+                </p>
+                <!-- Campo texto Pagas Extras -->
+                <p>
+                    <label>Pagas Extra</label>
+                    <input placeholder="Formato número: xxxx.xx" type="number" class="form-control" name="pagasextra_sueldo" #pagasextra_sueldo="ngModel" [(ngModel)]="politician.pAGASEXTRA_SUELDO">
+                </p>
+                <!-- Campo texto Otras Dietas E Indemnizaciones -->
+                <p>
+                    <label>Otras Dietas E Indemnizaciones</label>
+                    <input placeholder="Formato número: xxxx.xx" type="number" class="form-control" name="otrasdiestaseindemnizaciones_sueldo" #otrasdiestaseindemnizaciones_sueldo="ngModel" [(ngModel)]="politician.oTRASDIETASEINDEMNIZACIONES_SUELDO">
+                </p>
+                <!-- Campo texto Trienios -->
+                <p>
+                    <label>Trienios</label>
+                    <input placeholder="Formato número: xxxx.xx" type="number" class="form-control" name="trienios_sueldo" #trienios_sueldo="ngModel" [(ngModel)]="politician.tRIENIOS_SUELDO">
+                </p>
+                <!-- Campo texto Retribución Mensual -->
+                <p>
+                    <label>
+                        Retribución Mensual*
+                        <!-- Validación del campo -->
+                        <span class="msg-req" *ngIf="!retribucionmensual.valid && (retribucionmensual.dirty || retribucionmensual.touched)">
+                            Campo requerido. Formato número: xxxx.xx
+                        </span>
+                    </label>
+                    <input placeholder="Formato número: xxxx.xx" type="number" class="form-control" name="retribucionmensual" #retribucionmensual="ngModel" [(ngModel)]="politician.rETRIBUCIONMENSUAL" required>
+                 </p>
+                <!-- Campo texto Retribución Anual -->
+                <p>
+                    <label>
+                        Retribución Anual*
+                        <!-- Validación del campo -->
+                        <span class="msg-req" *ngIf="!retribucionanual.valid && (retribucionanual.dirty || retribucionanual.touched)">
+                            Campo requerido. Formato número: xxxx.xx
+                        </span>
+                    </label>
+                    <input placeholder="Formato número: xxxx.xx" type="number" class="form-control" name="retribucionanual" #retribucionanual="ngModel" [(ngModel)]="politician.rETRIBUCIONANUAL" required>
+                </p>
+                <!-- Campo texto Observaciones -->
+                <p>
+                    <label>Observaciones</label>
+                    <input type="text" class="form-control" name="observaciones" #observaciones="ngModel" [(ngModel)]="politician.oBSERVACIONES">
+                </p>
+                <p id="msg-req-info">
+                    *<em>Campo requerido</em>
+                </p>
+                <!-- El botón submit estará deshabilitado hasta que todos los campos requeridos estén completos -->
+                <input type="submit" value="Aceptar" class="btn btn-success" [disabled]="!PoliticianNewForm.form.valid">
+            </form>  
+    </div>
+</div>

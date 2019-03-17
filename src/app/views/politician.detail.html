@@ -1,0 +1,49 @@
+<!-- Vista para mostrar un registro político de la base de datos -->
+<div class="col-md-12 detail-politician">
+    <div class="col-md-6 col-md-offset-3">
+        <!-- Efecto cargando -->
+        <div class="loader" *ngIf="loading=='show'" style="position:absolute">
+            <img src="/assets/img/loader.gif"/>
+        </div>
+        <!-- Mensaje de fallo al recibir un error -->
+        <div class="alert alert-danger" *ngIf="status=='error'">
+                Opps! ha ocurrido un error: {{msg_error}}
+        </div>
+        <!-- En caso de éxito pintamos los datos del político -->
+        <div class="container" *ngIf="status=='success'">
+            <!-- Titular -->
+            <h3 id="name">
+                {{politician.tITULAR}}
+                <!-- Bontón para editar el registro -->
+                <a [routerLink]="['/update', politician.id]"><span class="glyphicon glyphicon-edit" id="edit-button" aria-hidden="true"></span></a>
+            </h3>
+            <!-- Resumen -->
+            <h5 id="desc">{{politician.cARGO}} ({{politician.iNSTITUCION}})</h5>
+            <h4 id="party"><strong>{{politician.pARTIDO}}</strong></h4>
+            <!-- Panel con datos de Cargos, sueldos y retribuciones -->
+            <h4 id="info-heading">Cargos, sueldos y retribuciones</h4>
+            <div id="info-data">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div><strong>{{politician.cARGO}}</strong></div>
+                        <!-- Panel para listar los sueldos y retibuciones en el caso de existir -->
+                        <div class="panel-body" id="salary">
+                            <div *ngIf="politician.rETRIBUCIONMENSUAL"><strong>Salario bruto mensual:</strong> {{politician.rETRIBUCIONMENSUAL | currency: '€'}}</div>
+                            <div *ngIf="politician.rETRIBUCIONANUAL"><strong>Salario bruto anual:</strong> {{politician.rETRIBUCIONANUAL | currency: '€'}}</div>
+                            <p id="salary-text">Especificaciones sobre el salario</p>
+                            <ul id="salary-info">
+                                <li *ngIf="politician.sUELDOBASE_SUELDO">Salario base: {{politician.sUELDOBASE_SUELDO | currency: '€'}}</li>
+                                <li *ngIf="politician.cOMPLEMENTOS_SUELDO">Complementos sueldo: {{politician.cOMPLEMENTOS_SUELDO | currency: '€'}}</li>
+                                <li *ngIf="politician.pAGASEXTRA_SUELDO">Pagas extras: {{politician.pAGASEXTRA_SUELDO | currency: '€'}}</li>
+                                <li *ngIf="politician.oTRASDIETASEINDEMNIZACIONES_SUELDO">Otras dietas e indemnizaciones: {{politician.oTRASDIETASEINDEMNIZACIONES_SUELDO | currency: '€'}}</li>
+                                <li *ngIf="politician.tRIENIOS_SUELDO">Trienios: {{politician.tRIENIOS_SUELDO | currency: '€'}}</li>
+                            </ul>
+                            <!-- Observaciones si existen -->
+                            <div *ngIf="politician.oBSERVACIONES"><em>{{politician.oBSERVACIONES}}</em></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
